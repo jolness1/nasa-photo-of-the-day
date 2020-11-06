@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ImgCard from './ImgCard';
+import { getRandomDate } from '../calcs';
+
+const API_KEY = 'vRYa6NBtdb9a5fCt7UQEoUHdgaeaY0gmTqEj3S1M';
 
 export default function ImgGrid(){
     const [imgState, setImgState] = useState();
@@ -9,8 +12,10 @@ export default function ImgGrid(){
     const [explainState, setExplainState] = useState('information');
 
     useEffect(() => {
+        const dateParam = `&date=${getRandomDate(2015, 2020)}`
+        const apiKeyParam = `?api_key=${API_KEY}`;
         axios
-            .get('https://api.nasa.gov/planetary/apod?api_key=vRYa6NBtdb9a5fCt7UQEoUHdgaeaY0gmTqEj3S1M')
+            .get('https://api.nasa.gov/planetary/apod' + apiKeyParam + dateParam)
             .then(response => {
                 console.log(response.data);
                 setImgState(response.data.url);
@@ -26,3 +31,8 @@ export default function ImgGrid(){
         </div>
          )
     }
+
+    
+    ImgCard`
+    width: 10%;
+    `
